@@ -1,6 +1,6 @@
-# Site Web - Dr. Mboloko Esimo Justin
+# Site Web - Pr. Mboloko Esimo Justin
 
-Site web moderne et responsive pour le Dr. Mboloko Esimo Justin, expert en gynécologie-obstétrique, fertilité et PMA à Kinshasa, RDC.
+Site web moderne et responsive pour le Pr. Mboloko Esimo Justin, expert en gynécologie-obstétrique, fertilité et PMA à Kinshasa, RDC.
 
 ## 🚀 Features
 

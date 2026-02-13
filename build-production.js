@@ -181,7 +181,7 @@ try {
         "icon": "heart-pulse",
         "excerpt": "Les causes de l'infertilité peuvent être multiples. Découvrez les facteurs à prendre en compte et les solutions disponibles pour les couples.",
         "date": new Date().toISOString().split('T')[0],
-        "author": "Dr. Mboloko Esimo Justin",
+        "author": "Pr. Mboloko Esimo Justin",
         "content": "Contenu complet de l'article...",
         "published": true
       }
@@ -280,7 +280,7 @@ Sitemap: ${SITE_URL}/sitemap.xml
 
   // 11. Créer un fichier README amélioré pour le déploiement
   console.log("📝 Création du README.md...");
-  const readmeContent = `# Site Statique - Dr. Mboloko Esimo Justin
+  const readmeContent = `# Site Statique - Pr. Mboloko Esimo Justin
 
 Ce dossier contient la version statique optimisée du site web, prête à être déployée.
 
