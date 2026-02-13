@@ -636,10 +636,6 @@ input[aria-invalid="true"]:focus,
   pointer-events: none;
 }
 
-.static {
-  position: static;
-}
-
 .fixed {
   position: fixed;
 }

@@ -151,11 +151,32 @@ kill PID1 PID2
 
 ## 📦 Build pour la Production
 
-Compiler le CSS pour la production:
+```bash
+npm run build
+```
+
+Génère le site optimisé dans `dist/` avec sitemap.xml et robots.txt.
+
+### Configuration SEO
+
+Le fichier `site.config.js` permet de définir l’URL du site pour l’indexation :
+
+```javascript
+module.exports = {
+  SITE_URL: process.env.SITE_URL || "https://drmboloko.cmedith.com",
+};
+```
+
+Pour un autre domaine (ex. Cloudflare Pages) :
 
 ```bash
-npm run build:css
+SITE_URL=https://votresite.pages.dev npm run build
 ```
+
+**Fichiers SEO générés :**
+- `sitemap.xml` – plan du site pour les moteurs de recherche
+- `robots.txt` – instructions d’indexation
+- Données structurées Schema.org (Physician, MedicalBusiness, WebSite)
 
 ## 🔧 Architecture Technique
 

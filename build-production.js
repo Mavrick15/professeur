@@ -4,6 +4,8 @@ const path = require("path");
 const { execSync } = require("child_process");
 
 const distDir = path.join(__dirname, "dist");
+const siteConfig = require("./site.config.js");
+const SITE_URL = siteConfig.SITE_URL.replace(/\/$/, ""); // Sans trailing slash
 
 // Fonction pour calculer la taille des fichiers
 function getFileSize(filePath) {
@@ -84,14 +86,17 @@ try {
   // 3. Lire et optimiser index.html
   console.log("📄 Optimisation de index.html...");
   let indexHtml = fs.readFileSync(path.join(__dirname, "index.html"), "utf-8");
-  
+
+  // Remplacer l'URL du site pour SEO (canonical, og, schema.org)
+  indexHtml = indexHtml.replace(/__SITE_URL__/g, SITE_URL);
+
   // S'assurer que les chemins sont relatifs correctement
   indexHtml = indexHtml.replace(/href="\.\//g, 'href="/');
   indexHtml = indexHtml.replace(/src="\.\//g, 'src="/');
-  
+
   // Minifier le HTML (optionnel - décommenter si nécessaire)
   // indexHtml = minifyHTML(indexHtml);
-  
+
   fs.writeFileSync(path.join(distDir, "index.html"), indexHtml);
   console.log(`✓ index.html optimisé (${getFileSize(path.join(distDir, "index.html"))})\n`);
 
@@ -235,13 +240,17 @@ try {
   fs.writeFileSync(path.join(distDir, ".htaccess"), htaccessContent);
   console.log("✓ .htaccess créé\n");
 
-  // 8. Créer un fichier sitemap.xml
+  // 8. Créer un fichier sitemap.xml (SEO)
   console.log("🗺️  Création du sitemap.xml...");
+  const lastmod = new Date().toISOString().split("T")[0];
   const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
-    <loc>https://drmboloko.com/</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <loc>${SITE_URL}/</loc>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -250,12 +259,15 @@ try {
   fs.writeFileSync(path.join(distDir, "sitemap.xml"), sitemapContent);
   console.log("✓ sitemap.xml créé\n");
 
-  // 9. Créer un fichier robots.txt
+  // 9. Créer un fichier robots.txt (SEO)
   console.log("🤖 Création du robots.txt...");
-  const robotsContent = `User-agent: *
+  const robotsContent = `# Robots.txt - Dr Mboloko Esimo Justin
+User-agent: *
 Allow: /
+Disallow: /public/dhws-data-injector.js
 
-Sitemap: https://drmboloko.com/sitemap.xml
+# Sitemap
+Sitemap: ${SITE_URL}/sitemap.xml
 `;
   fs.writeFileSync(path.join(distDir, "robots.txt"), robotsContent);
   console.log("✓ robots.txt créé\n");
