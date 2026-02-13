@@ -1,0 +1,6 @@
+# Configuration Cloudflare Pages - Dr. Mboloko Esimo Justin
+name = "professeur"
+compatibility_date = "2025-01-01"
+
+# Dossier de sortie du build (généré par npm run build)
+pages_build_output_dir = "./dist"
